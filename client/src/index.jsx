@@ -9,11 +9,15 @@ class App extends React.Component {
   constructor(props) {
   	super(props)
   	this.state = {
-      movies: [{deway: "movies"}],
-      favorites: [{deway: "favorites"}],
+      movies: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+      favorites: [100, 200, 300],
       showFaves: false,
     };
-    
+
+    this.saveMovie = this.saveMovie.bind(this);
+    this.swapFavorites = this.swapFavorites.bind(this);
+    this.deleteMovie = this.deleteMovie.bind(this);
+
     // you might have to do something important here!
   }
 
@@ -36,6 +40,8 @@ class App extends React.Component {
     });
   }
 
+  
+
   render () {
   	return (
       <div className="app">
@@ -43,7 +49,8 @@ class App extends React.Component {
         
         <div className="main">
           <Search swapFavorites={this.swapFavorites} showFaves={this.state.showFaves}/>
-          <Movies movies={this.state.showFaves ? this.state.favorites : this.state.movies} showFaves={this.state.showFaves}/>
+          <Movies movies={this.state.showFaves ? this.state.favorites : this.state.movies} 
+                  showFaves={this.state.showFaves}/>
         </div>
       </div>
     );
