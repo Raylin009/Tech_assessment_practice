@@ -10,27 +10,36 @@ class App extends React.Component {
   	super(props)
   	this.state = {
       movies: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
-      favorites: [100, 200, 300],
+      favorites: [100, 200, 300, ,400, 500, 600, 700, 800, 900, 1000],
       showFaves: false,
     };
 
     this.saveMovie = this.saveMovie.bind(this);
     this.swapFavorites = this.swapFavorites.bind(this);
     this.deleteMovie = this.deleteMovie.bind(this);
-
-    // you might have to do something important here!
+    this.handleFaveListMod = this.handleFaveListMod.bind(this);
   }
 
   getMovies() {
     // make an axios request to your server on the GET SEARCH endpoint
   }
 
-  saveMovie() {
+  saveMovie(index) {
     // same as above but do something diff
+    this.setState({
+      favorites: this.state.favorites.concat(this.state.movies[index])
+    })
+    console.log('save movie number '+index+' becuse we are in movies list');
   }
 
-  deleteMovie() {
+  deleteMovie(index) {
     // same as above but do something diff
+    var newState = this.state.favorites;
+    newState.splice(index, 1);
+    this.setState({
+      favorites: newState
+    })
+    console.log('delete movie number '+index+' beacuse we are in fave list');
   }
 
   swapFavorites() {
@@ -38,6 +47,14 @@ class App extends React.Component {
     this.setState({
       showFaves: !this.state.showFaves
     });
+  }
+
+  handleFaveListMod (index){
+    if(this.state.showFaves){
+      this.deleteMovie(index);
+    }else{
+      this.saveMovie(index);
+    }
   }
 
   
@@ -50,7 +67,8 @@ class App extends React.Component {
         <div className="main">
           <Search swapFavorites={this.swapFavorites} showFaves={this.state.showFaves}/>
           <Movies movies={this.state.showFaves ? this.state.favorites : this.state.movies} 
-                  showFaves={this.state.showFaves}/>
+                  showFaves={this.state.showFaves}
+                  modFavListFunc = {this.handleFaveListMod}/>
         </div>
       </div>
     );
