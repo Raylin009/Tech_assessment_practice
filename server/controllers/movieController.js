@@ -17,7 +17,14 @@ module.exports = {
   },
   getGenres: (req, res) => {
     // make an axios request to get the list of official genres
-    
+    apiHelpers.queryAPI()
+    .then(function(response, b) {
+      res.send(b)
+    }).catch(
+      res.send('coucht err in server controller')
+    )
+
+    // res.send(apiHelpers.queryAPI())
     // use this endpoint, which will also require your API key: https://api.themoviedb.org/3/genre/movie/list
     
     // send back
@@ -29,3 +36,4 @@ module.exports = {
 
   }
 }
+
